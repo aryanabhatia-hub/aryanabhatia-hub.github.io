@@ -1,0 +1,362 @@
+<!--
+Program name: homework4.html
+Author: Aryan Bhatia
+Date created: 05/08/2026
+Date last edited: 05/08/2026
+Version: 4.0
+Description: Homework 4 patient registration form with Fetch API, iframe, cookies, local storage, and fixed footer.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhatia Medical - Homework 4</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="startHomework4();">
+
+  <div id="top">
+
+    <img src="wrdocs-logo.png" alt="Bhatia Medical Logo" width="100">
+
+    <h1>Bhatia Medical</h1>
+
+    <p id="dateText">Today is: </p>
+
+    <h2 id="welcomeMessage">Welcome New User</h2>
+
+    <div id="newUserArea" style="display:none;">
+
+      <label>
+        <input type="checkbox" id="newUserBox" onclick="startNewUser();">
+        Not this user? Click here to start as a new user.
+      </label>
+
+    </div>
+
+  </div>
+
+  <div id="mainWrapper">
+
+    <div id="iframeArea">
+
+      <h2>Patient Information Resource</h2>
+
+      <iframe
+        src="https://www.example.com"
+        title="Example iframe"
+        width="100%"
+        height="250">
+      </iframe>
+
+    </div>
+
+    <div id="middle">
+
+      <h2>Patient Registration Form</h2>
+
+      <form id="patientForm" action="thankyou.html" onsubmit="return finalSubmitCheck();">
+
+        <table border="0" cellpadding="6">
+
+          <tr>
+
+            <td>Remember Me:</td>
+
+            <td colspan="3">
+
+              <label>
+
+                <input
+                  type="checkbox"
+                  id="rememberMe"
+                  checked
+                  onchange="handleRememberChoice();">
+
+                Remember my first name and non-secure form data for next time.
+
+              </label>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>First Name:</td>
+
+            <td>
+
+              <input
+                type="text"
+                id="firstName"
+                maxlength="30"
+                required
+                pattern="[A-Za-z'-]{1,30}"
+                oninput="validateFirstName(); saveField('firstName');"
+                onblur="validateFirstName(); saveField('firstName'); saveCookieIfAllowed();">
+
+              <span class="error" id="firstNameError"></span>
+
+            </td>
+
+            <td>Middle Initial:</td>
+
+            <td>
+
+              <input
+                type="text"
+                id="middleInitial"
+                maxlength="1"
+                pattern="[A-Za-z]?"
+                oninput="validateMiddleInitial(); saveField('middleInitial');"
+                onblur="validateMiddleInitial(); saveField('middleInitial');">
+
+              <span class="error" id="middleInitialError"></span>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>Last Name:</td>
+
+            <td>
+
+              <input
+                type="text"
+                id="lastName"
+                maxlength="30"
+                required
+                pattern="[A-Za-z'-]{1,30}"
+                oninput="validateLastName(); saveField('lastName');"
+                onblur="validateLastName(); saveField('lastName');">
+
+              <span class="error" id="lastNameError"></span>
+
+            </td>
+
+            <td>Date of Birth:</td>
+
+            <td>
+
+              <input
+                type="date"
+                id="dob"
+                required
+                oninput="validateDOB(); saveField('dob');"
+                onblur="validateDOB(); saveField('dob');">
+
+              <span class="error" id="dobError"></span>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>ID Number:</td>
+
+            <td>
+
+              <input
+                type="password"
+                id="idNumber"
+                maxlength="9"
+                required
+                pattern="[0-9]{9}"
+                placeholder="9 digits"
+                oninput="validateIdNumber();"
+                onblur="validateIdNumber();">
+
+              <span class="error" id="idNumberError"></span>
+
+            </td>
+
+            <td>Email:</td>
+
+            <td>
+
+              <input
+                type="email"
+                id="email"
+                required
+                placeholder="name@example.com"
+                oninput="forceEmailLowercase(); validateEmail(); saveField('email');"
+                onblur="validateEmail(); saveField('email');">
+
+              <span class="error" id="emailError"></span>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>Phone:</td>
+
+            <td>
+
+              <input
+                type="text"
+                id="phone"
+                required
+                maxlength="12"
+                placeholder="713-555-1234"
+                oninput="formatPhone(); validatePhone(); saveField('phone');"
+                onblur="validatePhone(); saveField('phone');">
+
+              <span class="error" id="phoneError"></span>
+
+            </td>
+
+            <td>Address Line 1:</td>
+
+            <td>
+
+              <input
+                type="text"
+                id="address1"
+                maxlength="30"
+                required
+                oninput="validateAddress1(); saveField('address1');"
+                onblur="validateAddress1(); saveField('address1');">
+
+              <span class="error" id="address1Error"></span>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>Address Line 2:</td>
+
+            <td>
+
+              <input
+                type="text"
+                id="address2"
+                maxlength="30"
+                oninput="validateAddress2(); saveField('address2');"
+                onblur="validateAddress2(); saveField('address2');">
+
+              <span class="error" id="address2Error"></span>
+
+            </td>
+
+            <td>City:</td>
+
+            <td>
+
+              <input
+                type="text"
+                id="city"
+                maxlength="30"
+                required
+                oninput="validateCity(); saveField('city');"
+                onblur="validateCity(); saveField('city');">
+
+              <span class="error" id="cityError"></span>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>State:</td>
+
+            <td>
+
+              <select
+                id="state"
+                required
+                onchange="validateState(); saveField('state');">
+
+                <option value="">Loading states...</option>
+
+              </select>
+
+              <span class="error" id="stateError"></span>
+
+            </td>
+
+            <td>Zip Code:</td>
+
+            <td>
+
+              <input
+                type="text"
+                id="zip"
+                maxlength="5"
+                required
+                placeholder="77002"
+                oninput="validateZip(); saveField('zip');"
+                onblur="validateZip(); saveField('zip');">
+
+              <span class="error" id="zipError"></span>
+
+            </td>
+
+          </tr>
+
+        </table>
+
+        <br>
+
+        <center>
+
+          <input type="button" value="Review" onclick="reviewForm();">
+
+          &nbsp;&nbsp;&nbsp;
+
+          <input type="button" value="Validate" onclick="validateAll();">
+
+          &nbsp;&nbsp;&nbsp;
+
+          <input type="submit" id="submitBtn" value="Submit" style="display:none;">
+
+          &nbsp;&nbsp;&nbsp;
+
+          <input type="reset" value="Start Over" onclick="clearReview(); startNewUser();">
+
+        </center>
+
+      </form>
+
+    </div>
+
+    <div id="reviewArea">
+
+      <h2>PLEASE REVIEW THIS INFORMATION</h2>
+
+      <div id="reviewOutput">
+        Click the Review button to display your information here.
+      </div>
+
+      <div id="validateMessage"></div>
+
+    </div>
+
+  </div>
+
+  <div id="bottom">
+
+    <p>Bhatia Medical | PO BOX 18881 | Sugar Land, TX 77496</p>
+
+    <button type="button" onclick="alert('Contact Us clicked')">
+      CONTACT US
+    </button>
+
+  </div>
+
+  <script src="homework4.js"></script>
+
+</body>
+</html>
