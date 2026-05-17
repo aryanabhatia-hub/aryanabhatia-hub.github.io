@@ -1,0 +1,140 @@
+/*
+Program name: style2.css
+Author: Aryan Bhatia
+Date created: 03/27/2026
+Date last edited: 03/27/2026
+Version: 2.0
+Description: CSS for Homework 2 patient registration form.
+*/
+
+body {
+  background-color: lightblue;
+  font-family: Verdana, Arial, sans-serif;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, p, td, th, label {
+  color: black;
+}
+
+#top, #middle, #bottom, #reviewArea {
+  background-color: lightblue;
+  padding: 10px;
+}
+
+#top {
+  text-align: center;
+  border-bottom: 2px solid black;
+}
+
+#dateText {
+  font-weight: bold;
+}
+
+#mainWrapper {
+  width: 95%;
+  margin: 20px auto;
+}
+
+#middle {
+  border: 2px solid black;
+  margin-bottom: 20px;
+}
+
+#middle h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  vertical-align: top;
+  padding: 8px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+  width: 95%;
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-left: 8px;
+  margin-right: 3px;
+}
+
+input[type="range"] {
+  width: 180px;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+button:hover {
+  background-color: #e6e6e6;
+}
+
+#sliderValue {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+#passwordMessage {
+  font-weight: bold;
+}
+
+#reviewArea {
+  border: 2px solid black;
+  min-height: 200px;
+}
+
+#reviewArea h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+#reviewOutput {
+  background-color: white;
+  border: 1px solid black;
+  padding: 15px;
+  min-height: 150px;
+  white-space: pre-wrap;
+}
+
+#bottom {
+  text-align: center;
+  border-top: 2px solid black;
+  margin-top: 20px;
+}
